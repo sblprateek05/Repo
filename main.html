@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPU Scheduling Visualizer</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">Process Scheduling Algorithms</h1>
+    <hr class="my-4" />
+    <p class="lead">
+      Process scheduling algorithms manage the order in which tasks are executed on a CPU to optimize resource utilization and system performance. We have the following algorithms for task scheduling.<br />Choose any of the following:
+    </p>
+    <form id="algorithm">
+      <div class="algorithm-option">
+        <input type="radio" id="fcfs" name="algorithm" value="fcfs" checked class="heading" />
+        <label for="fcfs">FCFS (First Come First Serve)</label>
+      </div>
+      <div class="algorithm-option">
+        <input type="radio" id="sjf" name="algorithm" value="sjf" class="heading" />
+        <label for="sjf">SJF (Shortest Job First)</label>
+      </div>
+      <div class="algorithm-option">
+        <input type="radio" id="srtf" name="algorithm" value="srtf" class="heading" />
+        <label for="srtf">SRTF (Shortest Remaining Time First)</label>
+      </div>
+      <div class="algorithm-option">
+        <input type="radio" id="robin" name="algorithm" value="robin" class="heading" />
+        <label for="robin">Round Robin Scheduling</label>
+      </div>
+      <div class="algorithm-option">
+        <input type="radio" id="priority" name="algorithm" value="priority" class="heading" />
+        <label for="priority">Priority based scheduling (Higher number = higher priority)</label>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="input-section">
+      <h3>Process Configuration</h3>
+      <table id="inputTable">
+        <tr>
+          <th>Process</th>
+          <th>Arrival Time</th>
+          <th>Burst/CPU Time</th>
+          <th class="priority-only">Priority</th>
+        </tr>
+        <tr>
+          <td>P0</td>
+          <td><input class="initial arrivaltime" type="text" value="0" /></td>
+          <td><input class="initial exectime" type="text" value="5" /></td>
+          <td class="priority-only"><input type="text" value="1" /></td>
+        </tr>
+        <tr>
+          <td>P1</td>
+          <td><input class="initial arrivaltime" type="text" value="1" /></td>
+          <td><input class="initial exectime" type="text" value="3" /></td>
+          <td class="priority-only"><input type="text" value="2" /></td>
+        </tr>
+      </table>
+
+      <div id="quantumParagraph">
+        Time Quantum: <input id="quantum" type="text" value="3" />
+      </div>
+      
+      <div class="action-buttons">
+        <div class="controller">
+          <input id="minus" type="button" value="-" onclick="deleteRow();" />
+          <input type="button" value="+" onclick="addRow();" />
+        </div>
+        <input type="button" class="simulate-button" value="Simulate" onclick="draw();" />
+      </div>
+    </div>
+
+    <fresh></fresh>
+    
+    <div class="result-container">
+      <p class="zaz">
+        Total Completion Time: <strong id="timer"></strong> seconds
+      </p>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
